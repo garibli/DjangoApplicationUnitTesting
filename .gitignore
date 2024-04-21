@@ -1,0 +1,4 @@
+database/
+__pycache__
+migrations/
+README.txt

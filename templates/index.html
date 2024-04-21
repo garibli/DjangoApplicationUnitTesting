@@ -1,0 +1,119 @@
+<!--Fuad Garibli Yazılım Testi ödevi
+Bu index sayfası, django web projesi başladığı zaman açılacak olan ilk sayfayı görüntülemek için yazılmıştır.
+style dosyasını ayrı dosyada tanımlama gereği duymadığımdan, bvu dosyada tanımladım-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yazılım Testi Ödevi</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f3f3f3;
+        color: #333;
+        margin: 0;
+        padding: 0;
+      }
+      h1,
+      h2 {
+        color: #007bff;
+        text-align: center;
+      }
+      form {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+      input[type='text'] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+      button[type='submit'] {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: transform 0.3s;
+      }
+      button[type='submit']:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+      }
+      .analysis-container {
+        padding: 20px;
+      }
+      .analysis-item {
+        display: inline-block;
+        width: calc(29% - 22px);
+        margin-right: 20px;
+        margin-bottom: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        vertical-align: top;
+        transition: transform 0.3s;
+      }
+      .analysis-item:hover {
+        transform: translateY(-5px);
+      }
+      .file-name {
+        font-weight: bold;
+        color: #009688;
+      }
+      .analysis-detail {
+        margin-top: 10px;
+        color: #555;
+      }
+      ul {
+        padding-left: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Fuad Garibli (G201210558)</h1>
+    <h2>Yazılım Testi Ödev</h2>
+
+    <form method="post" action="{% url 'index' %}">
+      {% csrf_token %}
+      <label for="github_link">GitHub Linki Giriniz:</label>
+      <input type="text" id="github_link" name="github_link" required />
+      <button type="submit">Getir</button>
+    </form>
+    <h2>
+      <a href="{% url 'index2' %}">Analizler</a>
+    </h2>
+    {% if analysis_results %}
+    <h2>Sonuçlar:</h2>
+    <div class="analysis-container">
+      {% for result in analysis_results %}
+      <div class="analysis-item">
+        <div class="file-name">Dosya adı: {{ result.file_name }}</div>
+        <div class="analysis-detail">
+          <ul>
+            {% for key, value in result.analysis.items %}
+            <li>{{ key }}: {{ value }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </body>
+</html>
