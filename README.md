@@ -1,2 +1,1 @@
-Fuad Garibli Yazılım Testi Ödevi G201210558
-2023-2024 Bahar Yarıyılı
+Django application integrated with Unittest and system testing
